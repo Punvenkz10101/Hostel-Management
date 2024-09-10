@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Form</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-image: url('BROCHURE-HOSTEL-0011-1024x624.jpg');
+            background-size: cover;
+            position: relative;
+        }
+
+        .navbar {
+            background-color: transparent;
+            position: fixed;
+            top: 0;
+            left: 10;
+            width: 100%;
+            padding: 10px 20px;
+            z-index: 1000;
+            
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            padding-top: 10px;
+            margin-left: 50px;
+        }
+
+        .navbar-buttons {
+            float: right;
+            margin-top: -7px;
+            margin-right: 50px;
+        }
+
+        .navbar-buttons button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 25px;
+            padding: 10px 15px;
+            margin-left: 30px;
+            cursor: pointer;
+        }
+
+        .navbar-buttons button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .fetch-button {
+            margin-top: 200px;
+        }
+
+        .button-common {
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .button-common:hover {
+            background-color: #0056b3;
+        }
+
+        .table-container {
+            display: none; /* Hide the table initially */
+            background-color:rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 50px auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #cccccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 0px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .modal-footer button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .modal-footer button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Hostel Management</div>
+        <div class="navbar-buttons">
+            <a href="Home.html"><button>Home</button></a>
+            <a href="StudentPage.html"><button>Student</button></a>
+            <a href="WardenPage.html"><button>Warden</button></a>
+            <a href="RoomPage.html"><button>Room</button></a>
+            <a href="MessPage.html"><button>Mess</button></a>
+            <a href="BlockPage.html"><button>Block</button></a>
+            
+        </div>
+    </div>
+    <div class="fetch-button">
+        <button id="fetch-students" class="button-common">Fetch Student Details</button>
+    </div>
+    <div class="table-container" id="student-table-container">
+        <table id="student-table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Warden ID</th>
+                    <th>Room ID</th>
+                    <th>Block ID</th>
+                    <th>Mess ID</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for updating student details -->
+    <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">Update Student Details</div>
+            <div class="modal-body">
+                <input type="hidden" id="update-student-id">
+                <label for="update-name">Name</label>
+                <input type="text" id="update-name">
+                <label for="update-email">Email</label>
+                <input type="email" id="update-email">
+                <label for="update-contact-number">Contact Number</label>
+                <input type="text" id="update-contact-number">
+                <label for="update-warden-id">Warden ID</label>
+                <input type="text" id="update-warden-id">
+                <label for="update-room-id">Room ID</label>
+                <input type="text" id="update-room-id">
+                <label for="update-block-id">Block ID</label>
+                <input type="text" id="update-block-id">
+                <label for="update-mess-id">Mess ID</label>
+                <input type="text" id="update-mess-id">
+            </div>
+            <div class="modal-footer">
+                <button id="update-student-button" class="button-common">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="Home.js"></script>
+</body>
+</html>
