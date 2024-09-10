@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Details Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('BROCHURE-HOSTEL-0011-1024x624.jpg');
+            /* Replace 'background-image.jpg' with the path to your image */
+            background-size: cover;
+            position: relative;
+            /* Make body relative to allow absolute positioning */
+        }
+
+        .page-heading {
+            position: absolute;
+            top: 50px;
+            /* Adjust as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            font-size: 60px;
+            color: white;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 100px auto 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .navbar {
+            background-color: transparent;
+            position: fixed;
+            top: 0;
+            left: 10;
+            width: 100%;
+            padding: 10px 20px;
+            z-index: 1000;
+            /* Ensure the navbar is on top of other content */
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            padding-top: 10px;
+            margin-left: 50px;
+        }
+
+        .navbar-buttons {
+            float: right;
+            margin-top: -7px;
+            margin-right: 50px;
+        }
+
+        .navbar-buttons button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 25px;
+            padding: 10px 15px;
+            margin-left: 30px;
+            cursor: pointer;
+        }
+
+        .navbar-buttons button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Hostel Management</div>
+        <div class="navbar-buttons">
+            <a href="Home.html"><button>Home</button></a>
+            <a href="StudentPage.html"><button>Student</button></a>
+            <a href="WardenPage.html"><button>Warden</button></a>
+            <a href="RoomPage.html"><button>Room</button></a>
+            <a href="MessPage.html"><button>Mess</button></a>
+            <a href="BlockPage.html"><button>Block</button></a>   
+        </div>
+    </div>
+    <div class="form-container">
+        <h2>Warden Details Form</h2>
+        <form action="http://localhost:3000/submit-warden-form" method="post">          
+            <input type="text" name="warden_id" placeholder="Warden ID" required>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" name="age" placeholder="Age" required>
+            <input type="text" name="block_incharge" placeholder="Block Incharge" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
